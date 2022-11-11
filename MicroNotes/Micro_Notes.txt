@@ -1,6 +1,7 @@
 PC[Program Counter]
 SP[Stak Pointer] Higher Address---> Lower Address---
 
+
 0x00008 int main(void)                  
 0x0000C     {
     
@@ -434,8 +435,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 Flow
                             H/W Specific        HAL Specific
-Switch(EXTI0 Source)--> EXTI0_IRQHandler --> HAL_GPIO_EXTI_IRQHandler() --> 
-Actual Funcion where we can Code HAL_GPIO_EXTI_Callback() 
+Switch(EXTI0 Source)--> STACKING  --> EXTI0_IRQHandler --> HAL_GPIO_EXTI_IRQHandler() --> 
+Actual Funcion where we can Code HAL_GPIO_EXTI_Callback()---> UNSTACKING 
 
 void EXTI0_IRQHandler(void)
 {

@@ -130,19 +130,21 @@ making it ideal for demanding embedded applications.
 The Cortex-M3 processor is built on a high-performance processor core, with a 3-stage pipeline Harvard architecture, 
 making it ideal for demanding embedded applications.
 
-Why we use 16bit Instructions?
+Why we use 16 bit Instructions?
 1. Backward Compatibility
 2. High Code Density
-3. Multiple 16bit Instruction can be executed in single CPU Cycle
+3. Multiple 16 bit Instruction can be executed in single CPU Cycle
 
 AMBA: Advance Microcontroller Bus Architecture
-APB: Advance Peripheral Bus (Slow Speep Peripherals [UART, I2C, SPI])
+APB: Advance Peripheral Bus (Slow Speep Peripherals [UART, I2C, SPI], Debug Support(in M3 and M4))
 AHB: Advance High Performance Bus (High Speed Peripherals[USB , Ethernet], Memory,
 DMA, RAM)
 AXI : Advance eXntensible Interface (Used to Connect Components of SoC)
 PPB: Private Peripheral Bus
 * Internal PPB (for connecting Core to NVIC, SCB)
 * External PPB (for Connecting Debug Interface)
+
+(32 bit)
 
 SRAM Uses:
 1. Used to Store Entire Stack

@@ -124,6 +124,12 @@ Fetch the Address of ISR -> Execute ISR -> (UNStacking)Restore the context -> Ba
 Arm State: Contains 32 bit Instructions for More Performance Efficiency
 Thumb State: Contains 16 bit Instructions for More Energy Efficiency
 
+The Cortex-M0 processor is built on a high-performance processor core, with a 3-stage pipeline von Neumann architecture, 
+making it ideal for demanding embedded applications.
+
+The Cortex-M3 processor is built on a high-performance processor core, with a 3-stage pipeline Harvard architecture, 
+making it ideal for demanding embedded applications.
+
 Why we use 16bit Instructions?
 1. Backward Compatibility
 2. High Code Density

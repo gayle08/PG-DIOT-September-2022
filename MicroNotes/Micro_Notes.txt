@@ -80,6 +80,7 @@ SoC
 <10% is for the Micoprocessor
 
 Reset
+
 1. Power On Reset
 2. Brownout Reset   Min 3.3v 3.0v
 3. Watchdog Reset
@@ -104,8 +105,11 @@ M3 vs M4 (FPU,DSP)
 
 ISA : Thumb2 16bit & 32bit intructions
 
+ARM is soft IP Licensing company it will not manufacture chip it self
+
 Architecture-ARMv7M
 
+LinkerScript (*.LD) contains memory map specification
 
 MMU- Memory Management Unit (Virtual Memory/ Cache) = NA
 
@@ -120,10 +124,24 @@ Fetch the Address of ISR -> Execute ISR -> (UNStacking)Restore the context -> Ba
 Arm State: Contains 32 bit Instructions for More Performance Efficiency
 Thumb State: Contains 16 bit Instructions for More Energy Efficiency
 
+Why we use 16bit Instructions?
+1. Backward Compatibility
+2. High Code Density
+3. Multiple 16bit Instruction can be executed in single CPU Cycle
+
 AMBA: Advance Microcontroller Bus Architecture
-APB: Advance Peripheral Bus
-AHB: Advance High Performance Bus
-AXI : Advance eXntensible Interface 
+APB: Advance Peripheral Bus (Slow Speep Peripherals [UART, I2C, SPI])
+AHB: Advance High Performance Bus (High Speed Peripherals[USB , Ethernet], Memory,
+DMA, RAM)
+AXI : Advance eXntensible Interface (Used to Connect Components of SoC)
+PPB: Private Peripheral Bus
+* Internal PPB (for connecting Core to NVIC, SCB)
+* External PPB (for Connecting Debug Interface)
+
+SRAM Uses:
+1. Used to Store Entire Stack
+2. Return Address from Function , Return Address from Interrupt
+3. It Stores all Local/Global Variable data
 
 Operation States
 1. Thumb State (Default)
@@ -139,7 +157,7 @@ b. UnPrivledge Mode
 
 Programmer Model at Interrupt :
 User Switches from Thread Mode to the Handler Mode
-
+User Cannot switch from Thead Mode Unpriv. to Priv. Directly
 Restriction: User Cannot Change Directly from Thread Mode Unprivledge to Thread Mode Privledge
 
 Stack Pointer in Cortex M
@@ -207,6 +225,17 @@ Hard Fault handler is a Default handler for System Exception
 
 MSP Value is set by the First Entry of the Vector Table, 
 as the Vector Table only contains addresses so the first entry will set the address for MSP.
+
+SVC
+#Case1(Without OS) :Allowing the UnPrivledge Application getting the Privledge
+Access.
+#Case2 (With OS) :Allow Initialization of OS and the PSP
+
+PendSV
+#Case1(Without OS) : Helps processing Interrupts in two halves [1. Top Half
+Processing (High Priority) ,2. Bottom Half Processing (Low Priority)]
+#Case2 (With OS) : The PendSV exception can delaying the context-switching request
+until all other IRQ handlers have completed their processing.
 
 Reset Flow
 Init Main SP at address 0x00 -> Reset Vector(Pointing to an Address of Reset Handler) at address 0x04 -> Reset Handler (Init. Hardware like memory Sections Data and Code)-> main()
@@ -469,6 +498,10 @@ __weak void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
    */
 }
 
+QUESTIONS:
+1. Write a program to toggle the LEDS in a clockwise/anti-clockwise direction when the button is pressed (Use button as external interrupt)
+
+2. Write a program to interface a button and 2 LEDs. When the button is pressed, both the LEDs should flash 5 times
 
 Assignment 2 Timer
 Theory:

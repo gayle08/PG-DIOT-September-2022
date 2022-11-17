@@ -752,7 +752,8 @@ uint32_t counterVal;
 uint32_t inputCaptureVal;
 
 /* USER CODE BEGIN 2 */
-  HAL_TIM_IC_Start_IT(&htim2,TIM_CHANNEL_1);
+  HAL_TIM_IC_Start_IT(&htim2,TIM_CHANNEL_1); 
+  //start timer in input capture and interrupt mode
   
 /* USER CODE BEGIN WHILE */
 while (1)
@@ -779,6 +780,9 @@ Prescalar=16000
 1MS * 1000 * 100 = 100Sec
 
 STM Studio 
+
+Download Link:
+https://drive.google.com/drive/folders/17lYPV-PLveaj1bJPwpEAuRMpQ4WLtHpC?usp=share_link
 How to watch a Real Time Value of Variable?
 Step1: Go To File Menu
 Step2: Click on Import Variables

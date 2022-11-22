@@ -1,6 +1,4 @@
-
-
-BitBanding:Concept of Addressing a Bit
+Bit Banding:  Concept of Addressing a Bit
 Feature Availible in Two Regions in Memory Map: 1. SRAM 2. Peripheral
 #Bit Region or Bit Banding Region: Here every bit is addressed and mapped to a word
 in word Region/Alias region
@@ -15,35 +13,71 @@ LDR R16,0x22000002C
 MOV R1,0x01
 STR #R16,R1
 
-bit[00] Word:0x220000000 [0] bit[16]
+/*BIT BAND REGION*/
+Word Address  0x20000000
+Byte Address [0x00000000 	0x00000001 	0x00000002   0x00000003]
+Binary Value {0b000A0000    0b000Z0000 	0b0000Y000   0b00000X00
 
-Word:0x220000040 [0]
-bit[01] Word:0x220000004 [0] bit[17] 		Word:0x220000044 [0] W
-bit[02] Word:0x220000008 [0] 1 bit[18] 		Word:0x220000048 [0]
-bit[03] Word:0x22000000C [0] bit[19] 		Word:0x22000004C [0]
-bit[04] Word:0x220000010 [0] bit[20] 		Word:0x220000050 [0]
-bit[05] Word:0x220000014 [0] bit[21]		 Word:0x220000054 [0] S
-bit[06] Word:0x220000018 [0] bit[22] 		Word:0x220000058 [0]
-bit[07] Word:0x22000001C [0] bit[23] 		Word:0x22000005C [0]
-bit[08] Word:0x220000020 [0] 				0x220000060 [24]
-bit[09] Word:0x220000024 [0] 							0x220000064 [25]
-bit[10] Word:0x220000028 [0] 1|0 			0x220000068 [26]
-bit[11] Word:0x22000002C [0] X 				0x22000006C [27] P
-bit[12] Word:0x220000030 [0] 				0x220000070 [28]
-bit[13] Word:0x220000034 [0] 0x220000074 [29]
-bit[14] Word:0x220000038 [0] 0x220000078 [30] T
-bit[15] Word:0x22000003C [0] Y 0x22000007C [31]
+Word Address  0x20000004
+Byte Address [0x00000004 	0x00000005 	0x00000006   0x00000007]
+Binary Value {0b00000000    0b00000000 	0b00000000   0b00000000
 
-Word Address 0x20000004
-Byte Address [0x00000007 0x00000006 0x00000005 0x00000004]
-Binary Value {0b00000000 0b00000000 0b00000000 0b00000000}
-Word Address 0x20000008
-Byte Address [0x00000008 0x00000009 0x0000000A 0x0000000B]
-Binary Value {0b00000000 0b00000000 0b00000000 0b00000000}
-Word Address 0x2000000C
-Byte Address [0x0000000C 0x0000000D 0x0000000E 0x0000000F]
-Binary Value {0b00000000 0b00000000 0b00000000 0b00000000}
+Word Address  0x20000008
+Byte Address [0x00000008 	0x00000009 	0x0000000A   0x0000000B]
+Binary Value {0b00000000    0b00000000 	0b00000000   0b00000000
 
-If we want to set the value of 28th bit of the address 0x200000000, given the base
-address of alias Region 0x220000000, Which word will coressrespond to the above 28th bit?
-Answer 220000070
+Word Address  0x2000000C
+Byte Address [0x0000000C 	0x0000000D 	0x0000000E   0x0000000F]
+Binary Value {0b00000000    0b00000000 	0b00000000   0b00000000
+
+/*BIT BAND ALIAS REGION*/
+bit[01] Word:0x22000000 [0]			bit[17] Word:0x20000040 [0]
+bit[02] Word:0x22000004 [0]			bit[18] Word:0x20000044 [0]
+bit[03] Word:0x22000008 [0]	X		bit[19] Word:0x20000048 [0]
+bit[04] Word:0x2200000C [0]         bit[20] Word:0x2000004C [0]
+bit[05] Word:0x22000010 [0]			bit[21] Word:0x20000050 [0] Z
+bit[06] Word:0x22000014 [0]			bit[22] Word:0x20000054 [0]
+bit[07] Word:0x22000018 [0]			bit[23] Word:0x20000058 [0]
+bit[08] Word:0x2200001C [0]			bit[24] Word:0x2000005C [0]
+bit[09] Word:0x22000020 [0]			bit[25] Word:0x20000060 [0]
+bit[10] Word:0x20000024 [0]			bit[26] Word:0x20000064 [0]
+bit[11] Word:0x20000028 [0]			bit[27] Word:0x20000068 [0]
+bit[12] Word:0x2000002C [0]	Y		bit[28] Word:0x2000006C [0]
+bit[13] Word:0x20000030 [0]			bit[29] Word:0x20000070 [0] A
+bit[14] Word:0x20000034 [0]			bit[30] Word:0x20000074 [0]
+bit[15] Word:0x20000038 [0]			bit[31] Word:0x20000078 [0]
+bit[16] Word:0x2000003C [0]			bit[32] Word:0x2000007C [0]
+
+
+--> If we want to set the value of 30-th bit of the address 0x200000000, given the base
+address of alias Region 0x22000000, Which word will coressrespond to the above 30th bit?
+ANS: 0x22000074
+
+--> If we want to set the value of 28th bit of the address 0x40000000, given the base
+address of alias Region 0x42000000, Which word will coressrespond to the above 28th bit?
+ANS: 0x4200006C
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

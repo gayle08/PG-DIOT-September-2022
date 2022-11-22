@@ -1,0 +1,49 @@
+
+
+BitBanding:Concept of Addressing a Bit
+Feature Availible in Two Regions in Memory Map: 1. SRAM 2. Peripheral
+#Bit Region or Bit Banding Region: Here every bit is addressed and mapped to a word
+in word Region/Alias region
+Word Address 0x20000000
+Byte Address [0x00000003 0x00000002 0x00000001 0x00000000]
+Binary Value {0b0T00P000 0b00S000W0 0b Y 0 0 0 X 0 0 0 0b
+0 Z 0 0 0 1 0 0}
+[7][6][5][4][3][2][1][0] [7][6][5][4][3][2][1][0]
+#Word Region or BitBanding Alias region : Here every address is a word ,so that PC
+runs smoothly, is linked to a bit in Bit Region
+LDR R16,0x22000002C
+MOV R1,0x01
+STR #R16,R1
+
+bit[00] Word:0x220000000 [0] bit[16]
+
+Word:0x220000040 [0]
+bit[01] Word:0x220000004 [0] bit[17] 		Word:0x220000044 [0] W
+bit[02] Word:0x220000008 [0] 1 bit[18] 		Word:0x220000048 [0]
+bit[03] Word:0x22000000C [0] bit[19] 		Word:0x22000004C [0]
+bit[04] Word:0x220000010 [0] bit[20] 		Word:0x220000050 [0]
+bit[05] Word:0x220000014 [0] bit[21]		 Word:0x220000054 [0] S
+bit[06] Word:0x220000018 [0] bit[22] 		Word:0x220000058 [0]
+bit[07] Word:0x22000001C [0] bit[23] 		Word:0x22000005C [0]
+bit[08] Word:0x220000020 [0] 				0x220000060 [24]
+bit[09] Word:0x220000024 [0] 							0x220000064 [25]
+bit[10] Word:0x220000028 [0] 1|0 			0x220000068 [26]
+bit[11] Word:0x22000002C [0] X 				0x22000006C [27] P
+bit[12] Word:0x220000030 [0] 				0x220000070 [28]
+bit[13] Word:0x220000034 [0] 0x220000074 [29]
+bit[14] Word:0x220000038 [0] 0x220000078 [30] T
+bit[15] Word:0x22000003C [0] Y 0x22000007C [31]
+
+Word Address 0x20000004
+Byte Address [0x00000007 0x00000006 0x00000005 0x00000004]
+Binary Value {0b00000000 0b00000000 0b00000000 0b00000000}
+Word Address 0x20000008
+Byte Address [0x00000008 0x00000009 0x0000000A 0x0000000B]
+Binary Value {0b00000000 0b00000000 0b00000000 0b00000000}
+Word Address 0x2000000C
+Byte Address [0x0000000C 0x0000000D 0x0000000E 0x0000000F]
+Binary Value {0b00000000 0b00000000 0b00000000 0b00000000}
+
+If we want to set the value of 28th bit of the address 0x200000000, given the base
+address of alias Region 0x220000000, Which word will coressrespond to the above 28th bit?
+Answer 220000070

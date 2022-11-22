@@ -245,6 +245,8 @@ Processing (High Priority) ,2. Bottom Half Processing (Low Priority)]
 #Case2 (With OS) : The PendSV exception can delaying the context-switching request
 until all other IRQ handlers have completed their processing.
 
+
+
 Reset Flow
 Init Main SP at address 0x00 -> Reset Vector(Pointing to an Address of Reset Handler) at address 0x04 -> Reset Handler (Init. Hardware like memory Sections Data and Code)-> main()
 
@@ -274,6 +276,7 @@ Parity control(Parity check of received data frame): No Parity
 
 8N1@115200
 
+Bit Banding:
 If we want to set the value of 28th bit of the address 0x200000000, given the base address of 
 alias Region 0x220000000, Which word will coressrespond to the above 28th bit?
 
@@ -898,7 +901,7 @@ while (1)
   adcval= HAL_ADC_GetValue(&hadc1);
 }
 
-Assignment 4 RTC
+Assignment 4 RTC 
 
 Q11 Write a Interrupt Driven Program(RTC_INT_A11) to Learn Real Time Clock and 
 Configure Pins 
@@ -913,19 +916,19 @@ Activate Calender : Check
 Alarm A : Internal Alarm
 
 Calender Time:-
-Hours   : 23
-Minute  : 59
-Second  : 50
+Hours   : 23 // 22
+Minute  : 59  //58
+Second  : 50   //10
 
 Calender Date:-
-Weekday : Thursday
-Month   : January
-Date    : 28
-Year    : 2021
+Weekday : Thursday //thu
+Month   : January  //jan
+Date    : 28        //28
+Year    : 2021      //2021
 
 Alarm A:
-Time: 00:00:00
-Alarm Date : 29
+Time: 00:00:00    //22:58:20
+Alarm Date : 29    //28
 
 Part 2
 Alarm B:
@@ -961,10 +964,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       HAL_RTC_GetTime(&hrtc, &stimestructureget, RTC_FORMAT_BIN);
       /* Get the RTC current Date */
       HAL_RTC_GetDate(&hrtc, &sdatestructureget, RTC_FORMAT_BIN);
+	  
       /* Display time Format : hh:mm:ss */
       sprintf((char*)showtime,"%02d:%02d:%02d  ",stimestructureget.Hours, stimestructureget.Minutes, stimestructureget.Seconds);
       printf("Current Time %s",showtime);
       printf("Current Time %d",(uint8_t*)showtime);
+	  
       memset(showtime,0,sizeof(showtime));
       sprintf((char*)showtime,"%02d-%2d-%2d\r\n",sdatestructureget.Month, sdatestructureget.Date, 2000 + sdatestructureget.Year);
       printf("Current Date %s",showtime);
@@ -1124,17 +1129,33 @@ char rx;
 /* USER CODE BEGIN WHILE */
   while (1)
   {
-     HAL_UART_Receive_IT(&huart4, (uint8_t *)&rx, 1);
+     HAL_UART_Receive_IT(&huart4, (uint8_t *)&rx, 1);  // interrupt mode
+	 // HAL_UART_Receive(&huart4, (uint8_t *)tx,1, 10); // polling mode
   }
   
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
      HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
-     rx=rx+1;
+     rx=rx+1;  // rx='a' --> 97 rx=97+1 =98  --> 'b'
      HAL_UART_Transmit(&huart4, (uint8_t *)&rx, 1, 10);
 }
 
+LINUX: 
+USB MINICOM TERMINAL
+
+Setup and config: sudo minicom -s
+--> set baud rate, name of the /dev/ttyUSB0, 
+--> Save configuration as dfl
+--> Exit minicom
+
+Launch: sudo minicom
+
+To list the ports in Linux:
+sudo dmesg | grep tty
+
+Change permission of the USB0 for Command Shell Console in IDE
+sudo chmod -R 777 /dev/ttyUSB0
 Part 2 Assignment
 
 Transmit Entire String when user press Enter Key

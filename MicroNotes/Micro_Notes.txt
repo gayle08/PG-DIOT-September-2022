@@ -1144,6 +1144,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 LINUX: 
 USB MINICOM TERMINAL
 
+INSTALLATION AND SETUP COMMANDS FOR USB MINICOM
+
+
+sudo apt get minicom
+
 Setup and config: sudo minicom -s
 --> set baud rate, name of the /dev/ttyUSB0, 
 --> Save configuration as dfl
@@ -1156,6 +1161,7 @@ sudo dmesg | grep tty
 
 Change permission of the USB0 for Command Shell Console in IDE
 sudo chmod -R 777 /dev/ttyUSB0
+
 Part 2 Assignment
 
 Transmit Entire String when user press Enter Key
@@ -1202,7 +1208,7 @@ HAL_UART_Receive_DMA (&huart4, (uint8_t *)&UART1_rxBuffer, 1);
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-     HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_8);
+     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
      HAL_UART_Transmit(&huart4,(uint8_t*) &UART1_rxBuffer, 1,10);
      HAL_UART_Receive_DMA (&huart4, (uint8_t *)&UART1_rxBuffer, 1);
 }

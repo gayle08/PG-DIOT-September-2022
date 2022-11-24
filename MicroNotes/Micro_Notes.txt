@@ -1256,7 +1256,7 @@ while(1)
     HAL_SPI_Receive(&hspi1, Return, 2, 50);
     HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
     
-    Rx_x= (Return[1]<<8)|Return[0]
+    Rx_x= (Return[1]>>8)|Return[0]
     
     HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
     TxBuf[0]=0x2A|ReadFlag|MultiByte;//Read Multi Byte Address of Register for Y
@@ -1264,7 +1264,7 @@ while(1)
     HAL_SPI_Receive(&hspi1, Return, 2, 50);
     HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
     
-    Rx_y= (Return[1]<<8)|Return[0]
+    Rx_y= (Return[1]>>8)|Return[0]
     
     HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
     TxBuf[0]=0x2C|ReadFlag|MultiByte;//Read Multi Byte Address of Register for Z
@@ -1272,7 +1272,7 @@ while(1)
     HAL_SPI_Receive(&hspi1, Return, 2, 50);
     HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
     
-    Rx_z= (Return[1]<<8)|Return[0]
+    Rx_z= (Return[1]>>8)|Return[0]
     
 }
     

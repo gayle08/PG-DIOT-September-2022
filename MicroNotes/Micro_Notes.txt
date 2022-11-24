@@ -1240,10 +1240,11 @@ TxBuf[0]=0x20;//Address of Register
 TxBuf[1]=0x3F;//Data for Register
 HAL_SPI_Transmit(&hspi1, TxBuf, 2, 50);
 HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
-//Configure Control Register 4 with Address 0x23
+
+//Configure Control Register 4 with Address 0x20
 HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, RESET);//CS Pin Low
-TxBuf[0]=0x23;//Address of Register
-TxBuf[1]=0x10;//Data for Register
+TxBuf[0]=0x20;//Address of Register
+TxBuf[1]=0x37;//Data for Register
 HAL_SPI_Transmit(&hspi1, TxBuf, 2, 50);
 HAL_GPIO_WritePin(GPIOE, GPIO_PIN_3, SET);//CS Pin High
 

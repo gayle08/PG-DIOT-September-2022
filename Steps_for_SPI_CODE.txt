@@ -1,0 +1,65 @@
+PE3 -> GPIO (Chip Select Pin)
+ - defalut state high
+ 
+Connectivity SPI
+Full Duplex Master
+
+System View -> GPIO -> PE3 (HIGH)
+
+
+Step 1:
+PE3 -> GPIO (Chip Select Pin)
+ - defalut sate high
+ 
+Step 2:
+Connectivity SPI
+Full Duplex Master
+
+Step 3:
+Generate Code
+
+Step 4: (Write operation)
+a)  Configure Control register (20h) to value 37h (0 0 1 1 0 1 1 1)
+	PE3  --> RESET (CS line pulled low for start data transfer)
+	-- Store Address of register and data to be written to the register in a buffer.
+	SPI Transmit
+	PE3  --> SET (CS line pulled high for end data transfer)
+	
+b)  Read the Control Register 20h whether the value is updated or not.
+	PE3  --> RESET (CS line pulled low for start data transfer)
+	Store Address of register in a buffer.
+	SPI Transmit
+	SPI Receive
+	Save the output data from the register into a buffer
+	PE3  --> SET (CS line pulled high for end data transfer)
+	
+<---------Reading the X Y Z Cordinates----------------->	
+Step 5: 
+	Read the X_Reg 28h - 29h for X axis data
+	PE3  --> RESET (CS line pulled low for start data transfer)
+	Store Address of register in a buffer.
+	SPI Transmit
+	SPI Receive
+	Save the output of X axis data from the register into a buffer
+	PE3  --> SET (CS line pulled high for end data transfer)
+	
+	/* X_REG = 16 BIT
+	SIGNIFICANT DATA PRESENT IN THE HIGHER BYTE (8:15)
+	*/
+Step 6: 
+	Read the Y_Reg 2Ah - 2Bh for Y axis data
+	PE3  --> RESET (CS line pulled low for start data transfer)
+	Store Address of register in a buffer.
+	SPI Transmit
+	SPI Receive
+	Save the output of Y axis data from the register into a buffer
+	PE3  --> SET (CS line pulled high for end data transfer)
+	
+Step 7: 
+	Read the Z_Reg 2Ch - 2Dh for Z axis data
+	PE3  --> RESET (CS line pulled low for start data transfer)
+	Store Address of register in a buffer.
+	SPI Transmit
+	SPI Receive
+	Save the output of Z axis data from the register into a buffer
+	PE3  --> SET (CS line pulled high for end data transfer)

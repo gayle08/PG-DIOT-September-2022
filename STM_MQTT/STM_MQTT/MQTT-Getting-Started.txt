@@ -1,0 +1,111 @@
+#MQTT protocol
+-----------------------
+Publish subscribe paradigm - 
+Three main components
+-----------------------------
+Publisher (Mostly run at end devices)
+Broker - Can be installed on cloud (Good to have : High computing resources
+subscriber - Receive the data (Cloud/Gateway)
+------------------------------------------------------------------------------
+We setup publisher subscriber and broker on our host machine
+1. sudo apt install mosquitto broker - mosquitto broker
+2. sudo apt install mosquitto-clients - mosquitto_pub and mosquitto_sub clients 
+--------------------------------------------------------------------------------------
+MQTT : All the communication b/w publisher and subscriber happens through the broker using topic names
+----------------------------------------------------------------------------------------------------------
+#Publish and subscribe some msgs.
+mosquitto_pub -t cdac/acts/pune/desd-hall/temperature -m "temp is 20C"
+mosquitto_sub -t cdac/acts/pune/desd-hall 
+---------------------------------------------------------------------------
+Note:
+------------
+-m ---> message
+-t ---> topic name
+
+Refer : The manual page for details
+--------------------------------------
+man mosquitto_pub
+man mosquitto_sub
+-------------------------------------------
+Note:
+Whenever you are doing communication between publisher, subscriber and broker running on the same host machine we don't need
+to specifically write the broker address and port number at publisher and subscriber end(mosquitto_pub and mosquitto_sub)
+However, it is recommended to use 
+----------------------------------------------------------------------
+#Specifying the host and port explicitly 
+-h > hostip #ifconfig #can be hostname as well e.g localhost(for the same machine) or domain name for cloud
+-p > port number (1883 by default)
+mosquitto_pub -t cdac/acts/desd-hall/temperature -h 192.168.0.102 -p 1883 -m "room temp is 25c"
+mosquitto_sub -t cdac/acts/desd-hall/temperature -h 192.168.0.102 -p 1883
+------------------------------------------------------------------------------------------------------
+#send msg line by line (stdin)
+mosquitto_pub -t cdac/acts/desd-hall/temperature -h 192.168.0.102 -p 1883 -l  #stdin - line by line
+----------------------------------------
+#Open Source Public brokers
+#Don't share any important informations while using open source public brokers like bank details etc.
+#test your applications using any of thesse
+iot.eclipse.org  #IoT-Eclipse-Foundation - port 1883
+test.mosquitto.org  #mosquitto  - port - 1883
+---------------------------------------------------
+mosquitto_pub -t cdac/acts/desd-hall/temperature -h test.mosquitto.org -p 1883 -m "room temp is 25c"
+mosquitto_sub -t cdac/acts/desd-hall/temperature -h test.mosquitto.org -p 1883
+------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
